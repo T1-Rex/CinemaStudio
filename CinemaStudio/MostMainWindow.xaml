@@ -1,0 +1,232 @@
+﻿<Window x:Class="CinemaStudio.MostMainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CinemaStudio"
+        mc:Ignorable="d"
+        Title="Киностудия" MinHeight="520" MinWidth="850" Height="550" Width="900" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <local:ConveterImgUser x:Key="ConverterImgUser"/>
+        <Style x:Key="StButtonMain" TargetType="Button">
+            <Setter Property="Background" Value="#991F44A9"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border 
+                  Background="{TemplateBinding Background}" 
+                  BorderThickness="2"
+                  BorderBrush="#FFFFFF"
+                  CornerRadius="10"
+                  Padding="10,5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="Background" Value="#FF1F44A9"/>
+                    <Setter Property="BorderBrush" Value="#FF4E85EB"/>
+                </Trigger>
+
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#FF5646A8"/>
+                    <Setter Property="BorderBrush" Value="#FF5646A8"/>
+                </Trigger>
+
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="#401F44A9"/>
+                    <Setter Property="BorderBrush" Value="#40FFFFFF"/>
+                    <Setter Property="Foreground" Value="#80FFFFFF"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="StBtnMenu" TargetType="RadioButton">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0,0,0,0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{TemplateBinding Tag}" Stretch="Uniform" Width="40" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+                                <ContentPresenter x:Name="text" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                            </StackPanel>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <DataTrigger Binding="{Binding IsChecked, ElementName=TbtnMenu}" Value="True">
+                                <Setter TargetName="text" Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="Background" Value="#40000000"/>
+                </Trigger>
+
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Background" Value="#991F44A9"/>
+                    <Setter Property="BorderThickness" Value="5,0,0,0"/>
+                    <Setter Property="BorderBrush" Value="#211E68"/>
+                    <Setter Property="Foreground" Value="#99FFFFFF"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="StBtnMenuUser" TargetType="ToggleButton">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0,0,0,0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="45"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Image x:Name="ImgUserMenu" Grid.Column="0" Source="{Binding Tag, RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource ConverterImgUser}}" Stretch="Uniform" Width="45" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2,0,0,0"/>
+
+                                <ContentPresenter Grid.Column="1" x:Name="text" VerticalAlignment="Center" Margin="2,0,0,0"/>
+                            </Grid>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <DataTrigger Binding="{Binding IsChecked, ElementName=TbtnMenu}" Value="True">
+                                <Setter TargetName="text" Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <BitmapImage x:Key="ImgEmployee" UriSource="/Images/EmployeeImg.png"/>
+        <BitmapImage x:Key="ImgProject" UriSource="/Images/ProjectImg.png"/>
+        <BitmapImage x:Key="ImgArea" UriSource="/Images/AreaImg.png"/>
+        <BitmapImage x:Key="ImgFilmGroup" UriSource="/Images/FilmingGroup.png"/>
+        <BitmapImage x:Key="ImgSchedule" UriSource="/Images/ScheduleImg.png"/>
+        <BitmapImage x:Key="ImgExpenses" UriSource="/Images/ExpensesImg.png"/>
+        <BitmapImage x:Key="ImgRental" UriSource="/Images/RentalImg.png"/>
+        <BitmapImage x:Key="ImgUser" UriSource="/Images/UserImg.png"/>
+    </Window.Resources>
+
+    <Grid>
+        <Border>
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0.9, 0.9" EndPoint="0.1, 0.1">
+                    <GradientStop Color="#CC211E68" Offset="0.1171"/>
+                    <GradientStop Color="#CC5646A8" Offset="0.3837"/>
+                    <GradientStop Color="#CC1F44A9" Offset="0.6504"/>
+                    <GradientStop Color="#CC4E85EB" Offset="0.8789"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Menu -->
+            <Border Grid.Column="0" CornerRadius="0,20,20,0" Background="#99FFFFFF">
+                <Grid HorizontalAlignment="Left">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,15">
+                        <ToggleButton x:Name="TbtnMenu" Content="Cinema" FontSize="20" FontWeight="Bold" Margin="10,5,0,0" Background="Transparent" BorderThickness="0">
+                            <ToggleButton.Template>
+                                <ControlTemplate TargetType="ToggleButton">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter x:Name="textTbtn" Content="{TemplateBinding Content}" TextBlock.FontSize="{TemplateBinding FontSize}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                    </Border>
+
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Cursor" Value="Hand"/>
+                                            <Setter TargetName="textTbtn" Property="TextBlock.Foreground" Value="#898989"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </ToggleButton.Template>
+                        </ToggleButton>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1">
+                        <RadioButton x:Name="RbEmployee" GroupName="TabMenu" IsChecked="True" Content="Сотрудники" Tag="{StaticResource ImgEmployee}" Style="{StaticResource StBtnMenu}" Checked="RbMenu_Checked"/>
+                        <RadioButton x:Name="RbProject" GroupName="TabMenu" IsChecked="False" Content="Проекты" Tag="{StaticResource ImgProject}" Style="{StaticResource StBtnMenu}" Checked="RbMenu_Checked"/>
+                        <RadioButton x:Name="RbArea" GroupName="TabMenu" IsChecked="False" Content="Площадки" Tag="{StaticResource ImgArea}" Style="{StaticResource StBtnMenu}" Checked="RbMenu_Checked"/>
+                        <RadioButton x:Name="RbGroup" GroupName="TabMenu" IsChecked="False" Content="Съемочная группа" Tag="{StaticResource ImgFilmGroup}" Style="{StaticResource StBtnMenu}" Checked="RbMenu_Checked"/>
+                        <RadioButton x:Name="RbFilming" GroupName="TabMenu" IsChecked="False" Content="График съемок" Tag="{StaticResource ImgSchedule}" Style="{StaticResource StBtnMenu}" Checked="RbMenu_Checked"/>
+                        <RadioButton x:Name="RbExpencens" GroupName="TabMenu" IsChecked="False" Content="Затраты" Tag="{StaticResource ImgExpenses}" Style="{StaticResource StBtnMenu}" Checked="RbMenu_Checked"/>
+                        <RadioButton x:Name="RbRental" GroupName="TabMenu" IsChecked="False" Content="Прокат" Tag="{StaticResource ImgRental}" Style="{StaticResource StBtnMenu}" Checked="RbMenu_Checked"/>
+                    </StackPanel>
+
+                    <Grid Grid.Row="2" Margin="5">
+                        <ToggleButton x:Name="TgBtnUser" Style="{StaticResource StBtnMenuUser}" Click="TgBtnUser_Click">
+                            <ToggleButton.Content>
+                                <TextBlock x:Name="TextUser" Text="Имя пользователя" TextTrimming="CharacterEllipsis" FontWeight="Bold"/>
+                            </ToggleButton.Content>
+                        </ToggleButton>
+
+                        <Popup x:Name="MenuUser" Placement="Right" StaysOpen="False" PlacementTarget="{Binding ElementName=TgBtnUser}" AllowsTransparency="True" HorizontalOffset="-45" VerticalOffset="-25" Closed="MenuUser_Closed">
+                            <Border Background="#FFFFFF" BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="5" Padding="5">
+                                <Button x:Name="BtnExit" Content="Выход" Style="{StaticResource StButtonMain}" Click="BtnExit_Click"/>
+                            </Border>
+                        </Popup>
+                    </Grid>
+
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Setter Property="Width" Value="200"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsChecked, ElementName=TbtnMenu}" Value="True">
+                                    <Setter Property="Width" Value="85"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+                </Grid>
+            </Border>
+
+            <!-- Main Part -->
+            <Grid Grid.Column="1">
+                <ContentControl x:Name="MainPart"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

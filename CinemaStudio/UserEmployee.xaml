@@ -1,0 +1,257 @@
+﻿<UserControl x:Class="CinemaStudio.UserEmployee"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CinemaStudio"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="StButtonMain" TargetType="Button">
+            <Setter Property="Background" Value="#991F44A9"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border 
+                             Background="{TemplateBinding Background}" 
+                             BorderThickness="2"
+                             BorderBrush="#FFFFFF"
+                             CornerRadius="10"
+                             Padding="10,5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="Background" Value="#FF1F44A9"/>
+                    <Setter Property="BorderBrush" Value="#FF4E85EB"/>
+                </Trigger>
+
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#FF5646A8"/>
+                    <Setter Property="BorderBrush" Value="#FF5646A8"/>
+                </Trigger>
+
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="#401F44A9"/>
+                    <Setter Property="BorderBrush" Value="#40FFFFFF"/>
+                    <Setter Property="Foreground" Value="#80FFFFFF"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="StButtonSearch" TargetType="Button">
+            <Setter Property="Background" Value="#99FFFFFF"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border 
+                           Background="{TemplateBinding Background}" 
+                           BorderThickness="1"
+                           BorderBrush="#99898989"
+                           CornerRadius="10"
+                           Padding="10,5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="Background" Value="#40000000"/>
+                </Trigger>
+
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#99000000"/>
+                </Trigger>
+
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="#401F44A9"/>
+                    <Setter Property="BorderBrush" Value="#40FFFFFF"/>
+                    <Setter Property="Foreground" Value="#80FFFFFF"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="StTextSearch" TargetType="TextBlock">
+            <Setter Property="Visibility" Value="Collapsed"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Text.Length, ElementName=TbSearch}" Value="0">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="StListViewItem" TargetType="ListViewItem">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Opacity" Value="0.9"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <Border Background="{TemplateBinding Background}" BorderThickness="0" Opacity="{TemplateBinding Opacity}">
+                            <ContentPresenter/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="Opacity" Value="0.65"/>
+                </Trigger>
+
+                <Trigger Property="IsSelected" Value="True">
+
+                    <Setter Property="Opacity" Value="1"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="StTextListEmpty" TargetType="TextBlock">
+            <Setter Property="Visibility" Value="Collapsed"/>
+
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=DGEmployee, Path=Items.Count}" Value="0">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="StDGColumn" TargetType="DataGridColumnHeader">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+
+        <Style x:Key="StBtnClearSearch" TargetType="Button">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Gray"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Margin" Value="4,0,7,3"/>
+            <Setter Property="Padding" Value="2"/>
+            <Setter Property="Cursor" Value="Hand"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                          Background="{TemplateBinding Background}"
+                          VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                            <ContentPresenter TextBlock.Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="#FF666666"/>
+                </Trigger>
+
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Foreground" Value="#FF222222"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Сотрудники" FontSize="24" FontWeight="Bold" Foreground="#FFFFFF" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="35"/>
+
+        <Grid Grid.Row="1" Margin="150,10,150,0" MinWidth="200" MaxWidth="500">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.6*"/>
+                <ColumnDefinition Width="0.1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Background="#99FFFFFF" BorderBrush="#99898989" BorderThickness="1" CornerRadius="10" HorizontalAlignment="Stretch">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox x:Name="TbSearch" Grid.Column="0" Background="Transparent" BorderThickness="0" FontSize="14" Padding="7,2" TextChanged="TbSearch_TextChanged"/>
+
+                    <TextBlock Text="Поиск" Grid.Column="0" Foreground="Gray" FontSize="14" FontWeight="Bold" Padding="9,2" Style="{StaticResource StTextSearch}" IsHitTestVisible="False"/>
+
+                    <Button x:Name="BtnClearSearch" Grid.Column="1" Content="x" Visibility="Collapsed" Style="{StaticResource StBtnClearSearch}" Click="BtnClearSearch_Click"/>
+                </Grid>
+            </Border>
+
+            <Button x:Name="BtnSearch" Grid.Column="1" Style="{StaticResource StButtonSearch}" Margin="3,0" Click="BtnSearch_Click">
+                <Button.Content>
+                    <Image Source="/Images/SearchImg.png" Stretch="UniformToFill" Width="15" Height="15"/>
+                </Button.Content>
+            </Button>
+        </Grid>
+
+        <Grid Grid.Row="2" MaxWidth="1150" MaxHeight="700">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Margin="20,10,20,0">
+                <Border Background="#99FFFFFF" BorderThickness="0,0,0,2" BorderBrush="#898989" CornerRadius="20,20,0,0">
+                    <StackPanel Orientation="Horizontal" Margin="10,5,0,3">
+                        <Button x:Name="BtnAdd" Content="Добавить" Style="{StaticResource StButtonMain}" Click="BtnAdd_Click"/>
+                        <Button x:Name="BtnEdit" Content="Редактировать" Style="{StaticResource StButtonMain}" Margin="5,0" Click="BtnEdit_Click"/>
+                        <Button x:Name="BtnRemove" Content="Удалить" Style="{StaticResource StButtonMain}" Click="BtnRemove_Click"/>
+                        <Button x:Name="BtnExport" Content="Экспорт" Style="{StaticResource StButtonMain}" Margin="5,0" Click="BtnExport_Click"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <Grid Grid.Row="1" Margin="20,0,20,20">
+                <Border Background="#99FFFFFF" BorderThickness="0,0,0,2" CornerRadius="0,0,20,20">
+                    <Grid>
+                        <DataGrid 
+                           x:Name="DGEmployee"
+                           AutoGenerateColumns="False"
+                           HeadersVisibility="Column"
+                           IsReadOnly="True"
+                           Background="Transparent" 
+                           BorderThickness="0"
+                           Margin="7">
+
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Фамилия" Binding="{Binding Surname}" Width="*" HeaderStyle="{StaticResource StDGColumn}"/>
+                                <DataGridTextColumn Header="Имя" Binding="{Binding Name}" Width="*" HeaderStyle="{StaticResource StDGColumn}"/>
+                                <DataGridTextColumn Header="Отчество" Binding="{Binding Patronymic}" Width="*" HeaderStyle="{StaticResource StDGColumn}"/>
+                                <DataGridTextColumn Header="Специализация" Binding="{Binding Specialization.Name}" Width="1.7*" HeaderStyle="{StaticResource StDGColumn}"/>
+                                <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}"  Width="*" HeaderStyle="{StaticResource StDGColumn}"/>
+                                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*" HeaderStyle="{StaticResource StDGColumn}"/>
+                                <DataGridTextColumn Header="Ставка" Binding="{Binding Fees}" Width="*" HeaderStyle="{StaticResource StDGColumn}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <TextBlock Text="Ничего не найдено" FontSize="22" Foreground="Gray" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource StTextListEmpty}"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
